@@ -79,9 +79,9 @@ class Running(Training):
         return super().get_mean_speed()
 
     def get_spent_calories(self) -> float:
-        kcal = ((self.coeff_calorie_1*Running.get_mean_speed(self)-self.coeff_calorie_2)*
-                 self.weight/
-                 self.M_IN_KM * self.duration*self.HOUR_MIN)
+        kcal = ((self.coeff_calorie_1 * Running.get_mean_speed(self)
+                - self.coeff_calorie_2) * self.weight
+                / self.M_IN_KM * self.duration * self.HOUR_MIN)
         return kcal
 
     def show_training_info(self) -> InfoMessage:
@@ -110,9 +110,9 @@ class SportsWalking(Training):
         return super().get_mean_speed()
 
     def get_spent_calories(self) -> float:
-        kcal = ((self.const1 * self.weight +
-                (SportsWalking.get_mean_speed(self) ** 2 // self.height)*
-                 self.const2 * self.weight) * self.duration*self.HOUR_MIN)
+        kcal = ((self.const1 * self.weight
+                + (SportsWalking.get_mean_speed(self) ** 2 // self.height)
+                * self.const2 * self.weight) * self.duration * self.HOUR_MIN)
         return kcal
 
     def show_training_info(self) -> InfoMessage:
@@ -143,15 +143,18 @@ class Swimming(Training):
         return distance
 
     def get_mean_speed(self) -> float:
-        speed = self.length_pool * self.count_pool / self.M_IN_KM / self.duration
+        speed = (self.length_pool * self.count_pool / self.M_IN_KM
+                 / self.duration)
         return speed
 
     def get_spent_calories(self) -> float:
-        kcal = (Swimming.get_mean_speed(self)+self.pool_const1) * self.pool_const2 * self.weight
+        kcal = ((Swimming.get_mean_speed(self) + self.pool_const1)
+                * self.pool_const2 * self.weight)
         return kcal
 
     def show_training_info(self) -> InfoMessage:
         return super().show_training_info()
+
 
 def read_package(workout_type: str, data: list) -> Training:
     """Прочитать данные полученные от датчиков."""
@@ -163,11 +166,13 @@ def read_package(workout_type: str, data: list) -> Training:
     training1 = training_type[workout_type](*data)
     return training1
 
+
 def main(training: Training) -> None:
     """Главная функция."""
     info: InfoMessage
     info = training.show_training_info()
     print(info.get_message())
+
 
 if __name__ == '__main__':
     packages = [
