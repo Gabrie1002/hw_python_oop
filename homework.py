@@ -148,7 +148,7 @@ class Swimming(Training):
         return super().show_training_info()
 
 
-def read_package(workout_type: str, data: list[int]) -> Training:
+def read_package(workout_type: str, data: list) -> Training:
     """Прочитать данные полученные от датчиков."""
 
     training_type: Dict[str, Training] = {'RUN': Running,
